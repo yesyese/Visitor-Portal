@@ -95,7 +95,7 @@ export const formCAPI = {
   // Submit Visitor Registration (Form C) application
   submitApplication: async (applicationData) => {
     // === UPDATED ENDPOINT ===
-    return apiCall('/visitor-registrations', {
+    return apiCall('/visitor-registrations/', {
       method: 'POST',
       body: JSON.stringify(applicationData),
     });
@@ -268,4 +268,5 @@ const apiService = {
 apiUtils.initializeAuth();
 
 export default apiService;
+
 
