@@ -1,7 +1,7 @@
 // API Service for Foreign Visitor Portal
 // Centralized API calls and configuration
 
-const API_BASE_URL = 'https://ssp-backend-1ovl.onrender.com';
+const API_BASE_URL = 'https://sspbackend-production.up.railway.app';
 
 // API configuration
 const apiConfig = {
