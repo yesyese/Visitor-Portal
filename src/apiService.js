@@ -84,7 +84,7 @@ export const authAPI = {
     });
   },
   login: async (credentials) => {
-    return apiCall('/auth/login', {
+    return apiCall('/foreign-users/login', {
       method: 'POST',
       body: JSON.stringify(credentials)
     });
