@@ -18,32 +18,25 @@ const TopNavigation = ({ userName }) => {
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = async () => {
-    try {
-      // 1. Call the logout API endpoint using apiService
-      await apiService.auth.logout();
-      
-      // 2. Clear all local storage
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('user');
-      
-      // 3. Clear session storage
-      sessionStorage.clear();
-      
-      // 4. Clear API headers
-      if (apiService && apiService.utils) {
-        apiService.utils.removeAuthToken();
-      }
-      
-      // 5. Navigate to login page
-      navigate('/login');
-    } catch (error) {
-      console.error('Logout error:', error);
-      // Even if API call fails, still clear local data and redirect
+  const handleLogout = () => {
+    console.log('Logout button clicked!');
+    
+    // Remove access token from localStorage
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user');
+    
+    console.log('Tokens removed from localStorage');
+    
+    // Clear API headers
+    if (apiService && apiService.utils) {
       apiService.utils.removeAuthToken();
-      navigate('/login');
+      console.log('API headers cleared');
     }
+    
+    // Navigate to login page
+    console.log('Navigating to login page...');
+    navigate('/login');
   };
 
   // Close profile box on outside click
@@ -95,29 +88,13 @@ const TopNavigation = ({ userName }) => {
           ))}
         </div>
 
-        {/* Profile & Logout (right) */}
-        <div className="hidden md:flex items-center space-x-2 relative">
-          <button
-            ref={profileRef}
-            onClick={() => setShowProfileBox((v) => !v)}
-            className="p-2 rounded-full text-gray-300 hover:bg-[#21262d] transition-colors duration-300 focus:outline-none"
-            aria-label="Profile"
-          >
-            <FontAwesomeIcon icon={faUser} className="text-lg" />
-          </button>
-          {showProfileBox && (
-            <div className="absolute right-0 mt-[190px] w-56 bg-[#161b22] border border-[#30363d] rounded-lg shadow-lg z-50 px-6 py-5 text-center">
-              <div className="text-[#8b949e] text-xs mb-1">Logged in as</div>
-              <div className="text-lg font-semibold text-white mb-2">{userName}</div>
-              <button
-                onClick={handleLogout}
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 mt-2"
-              >
-                Logout
-              </button>
-            </div>
-          )}
-        </div>
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+        >
+          Logout
+        </button>
       </div>
 
       {/* Mobile Dropdown */}
